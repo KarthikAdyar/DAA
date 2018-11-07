@@ -1,0 +1,95 @@
+//Java code
+import java.util.*;
+class MergeSort{
+  void merge(int []a,int low,int high){
+    int i=low;
+    int j=mid+1;
+    int k=low;
+    int []arans=new int[20000];
+    while(i<=mid && j<=high){
+      if(a[i]<a[j]){
+        arans[k]=a[i];
+        i++;k++;
+      }
+      else{
+        arans[k]=a[j];
+        j++;k++;
+      }
+    }
+    while(i<=mid){
+      arans[k]=a[i];
+      i++;k++;
+    }
+    while(j<=high){
+      arans[k]=a[j];
+      j++;k++;
+    }
+    for(int p=low;p<=high;p++){
+        a[p]=arans[p];
+    }
+ }
+ void sort(int []a,int low,int high){
+        if(low<high){
+            int mid=(low+high)/2;
+            sort(a,low,mid);
+            sort(a,mid+1,high);
+            merge(a,low,mid,high);
+        }
+ }
+}
+public class MergeSort1{
+      public static void main(String []args){
+          Scanner in=new Scanner(System.in);
+          System.out.println("Enter your choice\n1.User Input\n2.Random Inputs");
+          choice=in.nextInt();
+          int []a=new int[100];
+          switch(choice){
+            case 1:int n;
+                   System.out.println("Enter the no.of elements");
+                   n=in.nextInt();
+                   System.out.println("Enter the elements"):
+                   for(int i=0;i<n;i++){
+                        a[i]=in.nextInt();
+                   }
+                   double start=System.nanoTime();
+                   MergeSort s=new MergeSort();
+                   s.sort(a,0,n-1);
+                   double end=System.nanoTime();
+                   System.out.println("The sorted array is");
+                   for(int j=0;j<n;j++){
+                        System.out.println(a[j]);
+                   }
+                   double elapseTime=(end-start);
+                   System.out.println("\n Time taken to sort the elements is"+elapseTime/1000000+"milliseconds");
+                   break;
+             case 2:int []b;
+                    int i;
+                    System.out.println("Enter the no.of elements");
+                    Scanner sc=new Scanner(System.in);
+                    int q=sc.nextInt();
+                    b=new int[q];
+                    Random generator=new Random();
+                    for(i=0;i<q;i++)
+                        b[i]=generator.nextInt(200000);
+                    System.out.println("\n Elements before sorting");
+                    for(i=0;i<q;i++)
+                         System.out.println(b[i]+" ");
+                    double start=System.nanoTime();
+                    MergeSort m=new MergeSort();
+                    m.sort(b,0,q-1);
+                    double end=System.nanoTime();
+                    double elapseTime=(end-start);
+                    System.out.println("\n Sorted elements are");
+                    for(i=0;i<q;i++)
+                        System.out.println(b[i]+" ");
+                    System.out.println("\n Time taken to sort the elements is"+elapseTime/1000000+"milliseconds");
+                    break;
+               default:System.out.println("Invalid choice");
+                        break;
+        }
+    }
+ }   
+                    
+
+
+    
